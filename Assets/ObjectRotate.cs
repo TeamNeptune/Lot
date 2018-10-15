@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectRotate : MonoBehaviour {
 
     public float speed = 0;
+    float now_speed = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -15,8 +16,10 @@ public class ObjectRotate : MonoBehaviour {
 	void Update () {
 	    if(Input.GetKey(KeyCode.Space))
         {
-            transform.Rotate(new Vector3(0, 0, speed * Time.deltaTime));
-        }	
-
-	}
+            now_speed = speed;
+        }
+        transform.Rotate(new Vector3(0, 0, now_speed * Time.deltaTime));
+        now_speed *= 0.98f;
+        if (now_speed < 0.001f) now_speed = 0;
+    }
 }
